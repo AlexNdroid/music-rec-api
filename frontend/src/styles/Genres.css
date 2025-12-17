@@ -1,0 +1,272 @@
+/* ===============================
+   CONTENEDOR GENERAL
+   =============================== */
+.genres-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* ===============================
+   GRID DE GÉNEROS
+   =============================== */
+.genres-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.genre-card {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 300px;
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.genre-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.genre-overlay {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.8rem;
+}
+
+.genre-label {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* ===============================
+   SECCIÓN DE GÉNERO SELECCIONADO
+   =============================== */
+.genre-section {
+  position: relative;
+  width: 100%;
+  min-height: 700px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+}
+
+.genre-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.65);
+  border-radius: 15px;
+}
+
+.genre-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  color: #fff;
+  text-align: center;
+}
+
+.back-button {
+  background: rgba(255,255,255,0.9);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.back-button:hover {
+  background: rgba(255,255,255,1);
+}
+
+/* ===============================
+   TABS
+   =============================== */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: nowrap;
+}
+
+.tabs button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255,255,255,0.9);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.2s;
+  color:#333;
+  font-weight:bold;
+}
+
+.tabs button.active {
+  background-color: #333;
+  color: #fff;
+}
+
+/* ===============================
+   ARTISTAS
+   =============================== */
+.artist-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.artist-section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(255,255,255,0.9);
+  color: #333;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.artist-image{
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artist-image img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.artist-info {
+  flex: 1;
+  text-align: left;
+}
+
+.artist-info h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.artist-info p {
+  margin: 0;
+  text-align: justify;
+}
+
+/* ===============================
+   COLABORACIONES
+   =============================== */
+.collaboration-block {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.collaborators-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, max-content));
+  gap: 1rem;
+  margin-top: 1rem;
+
+  justify-content: center; 
+}
+
+
+.collab-card {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.8rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.collab-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.collab-card h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.no-collabs {
+  color: #555;
+  font-style: italic;
+}
+
+/* ===============================
+   ÁLBUMES
+   =============================== */
+.album-section {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  background: rgba(255,255,255,0.9);
+  color: #333;
+  padding: 1rem;
+  border-radius: 10px;
+  align-items: flex-start;
+}
+
+.album-image img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.album-info {
+  flex: 1;
+  text-align: left;
+}
+
+.album-info h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+@media (max-width: 1024px) {
+  .artist-section,
+  .album-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .artist-info,
+  .album-info {
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .genres-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,281 @@
+/* ====================== */
+/* EXPLORE ESTILOS   */
+/* ====================== */
+.explorar-page {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1rem;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  gap: 1.5rem;
+}
+
+.explorar-page h1 {
+  text-align: center;
+  font-size: 2.3rem;
+  margin-bottom: 0.2rem;
+}
+
+.explorar-subtitle {
+  text-align: center;
+  color: #ccc;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.explorar-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.explorar-section h2 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+/* ====================== */
+/* PLAYLISTS PÚBLICAS     */
+/* ====================== */
+
+.playlist-section {
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.playlist-section h2 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  padding-left: 10px;
+}
+
+
+.playlist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.playlist-container h3{
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  padding-left: 10px;
+}
+
+.playlist-songs {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.playlist-songs li {
+  margin-bottom: 0.25rem;
+  list-style-type: none;
+}
+
+
+/* ====== GRID DE CARDS ====== */
+.explorar-grid {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 1.2rem; 
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.explorar-card {
+  background: #1f1f2e;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  flex: 0 1 180px; 
+  max-width: 200px; 
+  min-height: 260px;
+}
+
+.explorar-card:hover {
+  transform: translateY(-4px);
+  background: #29293d;
+}
+
+.explorar-card img {
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.explorar-card h3 {
+  font-size: 1rem;
+  margin: 0.3rem 0;
+  color: #fff;
+  text-align: center;
+}
+
+.explorar-card .artist-genre {
+  font-size: 0.85rem;
+  color: #ccc;
+  text-align: center;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.post-card-ex {
+  background: #242437;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.post-card-ex h3 {
+  margin: 0;
+}
+
+.post-card-ex p {
+  margin: 0;
+  color: #ccc;
+}
+
+.post-card-ex span {
+  font-size: 0.9rem;
+  color: #ff6a00;
+  display: block;
+}
+
+/*============================
+   SECCIÓN DE TENDENCIAS  
+============================ */
+.trending-section {
+  margin: 2rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.trend-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.trend-card:hover {
+  transform: translateY(-2px);
+}
+
+.trend-rank {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff9800;
+}
+
+.trend-info {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.trend-info span {
+  display: block;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.trend-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  color: #ff4d6d;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.like-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ======RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .explorar-grid {
+    gap: 1rem;
+  }
+
+  .explorar-card {
+    flex: 0 1 140px;
+    max-width: 150px;
+  }
+
+  .explorar-card img {
+    height: 120px;
+  }
+
+  .posts-list, .trend-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .explorar-card {
+    flex: 0 1 100%;
+    max-width: 100%;
+  }
+
+  .explorar-card img {
+    height: 100px;
+  }
+}

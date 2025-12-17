@@ -1,0 +1,148 @@
+/*================================
+   ESTILOS PARA LA PÁGINA DE LOGIN
+   ===============================*/
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, #6e8efb, #a777e3, #ff6a00, #ee0979);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  padding: 3rem 2.5rem;
+  width: 340px;
+  color: white;
+  text-align: center;
+  animation: fadeIn 0.7s ease;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.login-card input {
+  width: 100%;
+  padding: 0.9rem;
+  margin: 0.6rem 0;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.login-card input::placeholder {
+  color: #ddd;
+  letter-spacing: 0.5px;
+}
+
+.login-card input:focus {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 2px #ff6a00, 0 0 8px rgba(255, 106, 0, 0.6);
+}
+
+.login-card button {
+  width: 100%;
+  padding: 0.9rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(238, 9, 121, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.login-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 106, 0, 0.7);
+}
+
+.error {
+  background: rgba(255, 0, 0, 0.15);
+  color: #ffdcdc;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.register-link {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #f0f0f0;
+}
+
+.register-link a {
+  color: #ffccf2;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* ===== Animaciones ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/*==============================
+   RESPONSIVE
+   ===============================*/
+@media (max-width: 480px) {
+  .login-card {
+    width: 90%;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .login-title {
+    font-size: 1.7rem;
+  }
+
+  .login-card input,
+  .login-card button {
+    font-size: 0.95rem;
+  }
+}

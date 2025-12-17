@@ -1,0 +1,594 @@
+/*==============================
+   ESTILOS PARA LA PÁGINA DE PERFIL DE USUARIO
+   ===============================*/
+
+.user-profile-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar-profile {
+  width: 240px;
+  background: linear-gradient(180deg, #2d006e, #120033);
+  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.4);
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-profile button {
+  padding: 1rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-size: 1rem;
+  font-weight: 500;
+  backdrop-filter: blur(6px);
+}
+
+.sidebar button:hover {
+  background: #ff6a00;
+  transform: translateX(4px);
+}
+
+.user-dropdown{
+  color: #fff;
+}
+
+/* ====== MAIN CONTENT ====== */
+.profile-main {
+  flex-grow: 1; 
+  padding: 2rem;
+  display: flex;
+  justify-content: center; 
+  align-items: flex-start; 
+  min-height: 100%; 
+  box-sizing: border-box;
+}
+
+.profile-content {
+  width: 100%;
+  max-width: 850px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+
+/* ====== PERFIL ====== */
+.profile-tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-image-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-info {
+  color: #ddd;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ff6a00;
+  box-shadow: 0 0 15px rgba(255, 106, 0, 0.5);
+}
+
+.upload-btn {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  color: #fff;
+  font-weight: 500;
+}
+
+.upload-btn:hover {
+  background: #ff6a00;
+}
+
+.save-image-btn {
+  background: #ff6a00;
+  padding: 0.7rem 1.2rem;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.save-image-btn:hover {
+  background: #e05400;
+}
+
+/* ====== CARDS ====== */
+.post-tabs{
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  height: auto;
+}
+
+.create-post,
+.create-playlist,
+.post-card,
+.playlist-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.playlist-card h4{
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.playlist-card p{
+  font-size: 1rem;
+  color: #ddd;
+  line-height: 1.4;
+  text-align: center;
+} 
+
+.toggle-public {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.toggle-btn {
+  background: #ff6a00;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.toggle-btn:hover {
+  background: #e05400;
+}
+
+.toggle-dropdown {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  min-width: 100px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.toggle-public:hover .toggle-dropdown {
+  display: block;
+}
+
+.toggle-dropdown div {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.toggle-dropdown div:hover {
+  background: #ff6a00;
+  color: #fff;
+}
+
+.playlist-items {
+  margin-top: 10px;
+  list-style: none;
+  padding-left: 0;
+  color: #ccc;
+}
+
+.playlist-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.profile-stats {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #1f1f2e, #2e2e44);
+  border-radius: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  color: #fff;
+}
+
+.profile-stats h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #ff6a00;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.stat-item {
+  flex: 1 1 120px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  transition: transform 0.25s ease, background 0.25s ease;
+  cursor: default;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 106, 0, 0.15);
+}
+
+.stat-item strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ff6a00;
+  margin-bottom: 0.25rem;
+}
+
+.stat-item span {
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.stat-item.likes strong {
+  color: #ff4c4c; 
+}
+
+.stat-item.dislikes strong {
+  color: #4c8cff;
+}
+
+
+.remove-item {
+  color: #ff4c4c;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.remove-item:hover {
+  transform: scale(1.2);
+}
+
+
+/* ====== INPUTS ====== */
+.create-post input,
+.create-post textarea,
+.create-post select,
+.create-playlist input,
+.create-playlist textarea,
+.add-comment input,
+.add-item input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.add-comment,
+.add-item {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.post-button-spacer {
+  display: flex;
+  justify-content: center;
+}
+
+/* ====== BUTTONS ====== */
+.create-post button,
+.create-playlist button,
+.post-card button,
+.playlist-card button {
+  background: #ff6a00;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: 0.25s ease;
+  font-weight: 600;
+}
+
+.create-post button:hover,
+.create-playlist button:hover,
+.post-card button:hover,
+.playlist-card button:hover {
+  background: #e05400;
+  transform: translateY(-2px);
+}
+
+/* ====== COMMENTS ====== */
+.comments {
+  margin-top: 1rem;
+}
+
+.comment {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+/* ===================== RECOMMENDATIONS TAB ===================== */
+.recommendations-tab {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/*==========================
+  FORMULARIO DE CREAR RECOMENDACIÓN
+===========================*/
+.create-recommendation form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.08); 
+  padding: 1.5rem;                      
+  border-radius: 16px;                   
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.create-recommendation input,
+.create-recommendation textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.create-recommendation button {
+  background: #ff6a00;       
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.2rem;    
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+  align-self: center;    
+}
+
+.create-recommendation button:hover {
+  background: #e05400;
+}
+
+.recommendations-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.recommendation-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.recommendation-card strong {
+  font-size: 1.2rem;
+  color: #ff6a00;
+}
+
+.recommendation-card p {
+  font-size: 0.95rem;
+  color: #ddd;
+  line-height: 1.4;
+}
+
+.app-container .user-profile-container ~ .footer {
+  margin-left: 240px;
+  width: calc(100% - 240px);
+  box-sizing: border-box;
+}
+
+
+/* ===============================
+   RESPONSIVE
+   ===============================*/
+@media (max-width: 1024px) {
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 0.5rem 1rem;
+    width: 100%;
+    position: relative; 
+    flex-direction: column;
+  }
+
+  .navbar ul {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center; 
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .navbar li {
+    text-align: center;
+  }
+
+  .sidebar-profile {
+    width: 160px;
+    padding: 1.5rem 0.8rem;
+  }
+
+  .sidebar-profile button {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+   .profile-main {
+    flex-grow: 1;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100%;
+    box-sizing: border-box;
+  }
+
+  .profile-content {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto; 
+    box-sizing: border-box;
+  }
+
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-stats {
+    gap: 1rem;
+  }
+
+  .stat-item strong {
+    font-size: 1.6rem;
+  }
+
+  .stat-item span {
+    font-size: 0.85rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .navbar ul {
+    flex-direction: column;  
+    gap: 0.5rem;
+  }
+
+  .navbar li {
+    text-align: center;
+  }
+
+  .sidebar-profile {
+    width: 240px;
+    padding: 1rem 0.6rem;
+  }
+
+  .sidebar-profile button {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .profile-main {
+    padding: 1rem;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .profile-content {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .stat-item strong {
+    font-size: 1.4rem;
+  }
+
+  .stat-item span {
+    font-size: 0.85rem;
+  }
+
+}
+
