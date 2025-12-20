@@ -3,6 +3,24 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import "../styles/Navbar.css";
 
+// Obtener la URL base del backend desde la variable de entorno
+const API_URL = import.meta.env.VITE_API_URL;
+
+// Función helper para manejar la URL de la imagen
+const getProfileImage = (img, updatedAt) => {
+  if (!img) return "/default-avatar.png"; // fallback
+  // Si empieza con http, pero es localhost, reemplazar por API_URL
+  if (img.startsWith("http://localhost")) {
+    return img.replace("http://localhost:8080", API_URL) + `?t=${updatedAt || Date.now()}`;
+  }
+  // Si es relativa, añadir API_URL delante
+  if (!img.startsWith("http")) {
+    return `${API_URL}${img}?t=${updatedAt || Date.now()}`;
+  }
+  // Si es URL completa en producción
+  return `${img}?t=${updatedAt || Date.now()}`;
+};
+
 // Barra de navegación
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -10,7 +28,7 @@ export default function Navbar() {
   const { user, logout } = useContext(UserContext);
 
   const profileLink = user?.role === "admin" ? "/admin" : "/profile";
-  
+
   return (
     <nav className="navbar">
       {/* Logo */}
@@ -49,8 +67,8 @@ export default function Navbar() {
         {user && (
           <div className="navbar-user navbar-user-mobile">
             <img
-              src={user.image || "/default-avatar.png"}
-              alt="avatar"
+              src={getProfileImage(user?.image, user?.imageUpdatedAt)}
+              alt={user?.username || "Usuario"}
               className="user-avatar"
               onClick={() => setDropdownOpen(prev => !prev)}
             />
@@ -83,39 +101,36 @@ export default function Navbar() {
         </div>
       )}
 
-  
-{/* Usuario desktop */}
-{user && (
-  <div className={`navbar-user navbar-user-desktop ${dropdownOpen ? "open" : ""}`}>
-    <img
-      src={user?.image ? `${user.image}?t=${user.imageUpdatedAt || Date.now()}` : "/default-avatar.png"}
-      alt="avatar"
-      className="user-avatar"
-      onClick={() => setDropdownOpen(prev => !prev)}
-    />
-    <div className="user-dropdown">
-      <span onClick={() => setDropdownOpen(prev => !prev)}>
-        {user?.username || "Cargando..."}
-      </span>
-      {dropdownOpen && (
-        <div className="dropdown-content">
-          <Link to={profileLink} onClick={() => setDropdownOpen(false)}>Mi Perfil</Link>
-          <button
-            className="logout-btn"
-            onClick={() => {
-              logout();         // cerrar sesión
-              setDropdownOpen(false); // cerrar dropdown
-            }}
-          >
-            Cerrar sesión
-          </button>
+      {/* Usuario desktop */}
+      {user && (
+        <div className={`navbar-user navbar-user-desktop ${dropdownOpen ? "open" : ""}`}>
+          <img
+            src={getProfileImage(user?.image, user?.imageUpdatedAt)}
+            alt={user?.username || "Usuario"}
+            className="user-avatar"
+            onClick={() => setDropdownOpen(prev => !prev)}
+          />
+          <div className="user-dropdown">
+            <span onClick={() => setDropdownOpen(prev => !prev)}>
+              {user?.username || "Cargando..."}
+            </span>
+            {dropdownOpen && (
+              <div className="dropdown-content">
+                <Link to={profileLink} onClick={() => setDropdownOpen(false)}>Mi Perfil</Link>
+                <button
+                  className="logout-btn"
+                  onClick={() => {
+                    logout();
+                    setDropdownOpen(false);
+                  }}
+                >
+                  Cerrar sesión
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       )}
-    </div>
-  </div>
-)}
-
-
     </nav>
   );
 }
