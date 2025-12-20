@@ -266,7 +266,114 @@
 }
 
 @media (max-width: 600px) {
+  /* ===============================
+     GRID DE GÉNEROS
+     =============================== */
   .genres-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .genre-card {
+    height: 200px;
+  }
+
+  .genre-label {
+    font-size: 1.2rem;
+  }
+
+  /* ===============================
+     ARTISTAS
+     =============================== */
+  .artist-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .artist-image img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .artist-info {
+    text-align: center;
+  }
+
+  /* ===============================
+     ÁLBUMES
+     =============================== */
+  .album-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .album-image img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .album-info {
+    text-align: center;
+  }
+
+  /* ===============================
+     TABS
+     =============================== */
+  .tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tabs button {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+  }
+
+  /* ===============================
+     COLABORACIONES
+     =============================== */
+  .collaborators-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .collab-card img {
+    height: 120px;
+  }
+
+  .collab-card h4 {
+    font-size: 0.9rem;
+  }
+
+  /* ===============================
+     BOTONES
+     =============================== */
+  .back-button {
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+  }
+
+  /* ===============================
+     SECCIÓN DE GÉNERO SELECCIONADO
+     =============================== */
+  .genre-section {
+    min-height: 350px;
+  }
+
+  /* ===============================
+     CONTENEDOR GENERAL
+     =============================== */
+  .genres-container {
+    padding: 0.5rem;
+    margin: 1rem auto;
   }
 }
+
