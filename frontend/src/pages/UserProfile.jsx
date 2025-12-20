@@ -19,6 +19,11 @@ function UserProfile() {
   const [previewImage, setPreviewImage] = useState(null);
 
   const API_URL = import.meta.env.VITE_API_URL;
+  const getImageUrl = (img) => {
+    if (!img) return "/default-avatar.png";
+    if (img.startsWith("http")) return img.replace("http://localhost:8080", API_URL);
+    return `${API_URL}${img}`;
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -340,19 +345,7 @@ return (
           <div className="profile-tab">
 
             <div className="profile-image-section">
-              <img
-                src={
-                  previewImage ||
-                  (user?.image
-                    ? user.image.startsWith("http")
-                      ? user.image
-                      : `${API_URL}${user.image}`
-                    : "/default-avatar.png")
-                }
-                alt={user?.username || "Usuario"}
-                className="profile-avatar"
-              />
-            
+              <img src={previewImage || getImageUrl(user?.image)} alt={user?.username || "Usuario"} className="profile-avatar" />
               <label className="upload-btn">
                 Cambiar imagen
                 <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
