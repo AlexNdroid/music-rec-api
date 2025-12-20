@@ -17,6 +17,8 @@ const Register = () => {
     confirmPassword: false,
   });
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   //Validar todos los campos
   const validateForm = () => {
     const newErrors = {};
@@ -85,7 +87,7 @@ const Register = () => {
 
     if (Object.keys(foundErrors).length === 0) {
       try {
-        const res = await fetch('http://localhost:8080/api/auth/register', { // cambia a tu URL
+        const res = await fetch(`${API_URL}/api/auth/register`, { // cambia a tu URL
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

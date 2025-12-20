@@ -26,12 +26,14 @@ function Genres() {
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState("artists");
   const [loading, setLoading] = useState(false);
- const [selectedSubgenre, setSelectedSubgenre] = useState(null);
+  const [selectedSubgenre, setSelectedSubgenre] = useState(null);
+  
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const getImageUrl = (img) => {
     if (!img) return "/placeholder.jpg";
     if (img.startsWith("http://") || img.startsWith("https://")) return img;
-    return `http://localhost:8080${img}`;
+    return `${API_URL}${img}`;
   };
 
   // ================= FETCH =================
@@ -42,7 +44,7 @@ function Genres() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/admin/genres/slug/${genre.slug}`
+        `${API_URL}/api/admin/genres/slug/${genre.slug}`
       );
       setGenreData(res.data);
       setItems(res.data.recommendedArtists || []);

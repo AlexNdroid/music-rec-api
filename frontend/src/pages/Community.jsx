@@ -8,16 +8,18 @@ function Community() {
   const [newComments, setNewComments] = useState({});
   const [selectedType, setSelectedType] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const getImageUrl = (img) => {
     if (!img) return "/default-avatar.png";
     if (img.startsWith("http")) return img;
-    return `http://localhost:8080${img}`;
+    return `${API_URL}${img}`;
   };
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/posts");
+        const res = await fetch(`${API_URL}/api/posts`);
         const data = await res.json();
         setPosts(data.posts || []);
       } catch (err) {
@@ -34,7 +36,7 @@ function Community() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:8080/api/posts/${postId}/comment`, {
+      const res = await fetch(`${API_URL}/api/posts/${postId}/comment`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ content }),
@@ -57,7 +59,7 @@ function Community() {
 
   const handleLike = async (postId) => {
   const token = localStorage.getItem("token");
-  const res = await fetch(`http://localhost:8080/api/posts/${postId}/like`, {
+  const res = await fetch(`${API_URL}/api/posts/${postId}/like`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -76,7 +78,7 @@ function Community() {
 
 const handleDislike = async (postId) => {
   const token = localStorage.getItem("token");
-  const res = await fetch(`http://localhost:8080/api/posts/${postId}/dislike`, {
+  const res = await fetch(`${API_URL}/api/posts/${postId}/dislike`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
   });

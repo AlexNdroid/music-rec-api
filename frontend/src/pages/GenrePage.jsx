@@ -19,6 +19,8 @@ const genres = [
   { name: "Flamenco", slug: "flamenco" },
 ];
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Genres() {
   const [activeGenreSlug, setActiveGenreSlug] = useState(null);
   const [filter, setFilter] = useState("recommendedArtists");
@@ -40,7 +42,7 @@ function Genres() {
 
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/admin/genres/slug/${genre.slug}`
+        `${API_URL}/api/admin/genres/slug/${genre.slug}`
       );
       setGenreData(res.data);
       setItems(res.data.recommendedArtists || []);
@@ -69,7 +71,7 @@ function Genres() {
 
   const getImageUrl = (path) => {
     if (!path) return "";
-    return path.startsWith("http") ? path : `http://localhost:8080${path}`;
+    return path.startsWith("http") ? path : `${API_URL}${path}`;
   };
 
   return (

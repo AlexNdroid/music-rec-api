@@ -49,12 +49,13 @@ const AdminDashboard = () => {
       .replace(/\s+/g, "-")
       .replace(/[^\w\-]+/g, "");
 
-  const getImageUrl = (img) => (!img ? null : `http://localhost:8080${img}`);
+  const API_URL = import.meta.env.VITE_API_URL;
+  const getImageUrl = (img) => (!img ? null : `${API_URL}${img}`);
 
   // ================= FETCH =================
   const fetchUser = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/auth/profile", axiosConfig);
+      const res = await axios.get(`${API_URL}/api/auth/profile`, axiosConfig);
       setUser({ ...res.data.user, image: res.data.user.image || null });
     } catch (err) {
       console.error(err);
@@ -64,7 +65,7 @@ const AdminDashboard = () => {
 
   const fetchGenres = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/admin/genres", axiosConfig);
+      const res = await axios.get(`${API_URL}/api/admin/genres`, axiosConfig);
       setGenres(res.data);
     } catch (err) {
       console.error(err);
@@ -76,7 +77,7 @@ const AdminDashboard = () => {
     if (!genreId) return setSubgenres([]);
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/admin/genres/${genreId}/subgenres`,
+        `${API_URL}/api/admin/genres/${genreId}/subgenres`,
         axiosConfig
       );
       setSubgenres(res.data);
@@ -88,7 +89,7 @@ const AdminDashboard = () => {
 
   const fetchArtists = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/admin/artists", axiosConfig);
+      const res = await axios.get(`${API_URL}/api/admin/artists`, axiosConfig);
       setArtists(res.data);
     } catch (err) {
       console.error(err);
@@ -98,7 +99,7 @@ const AdminDashboard = () => {
 
   const fetchAlbums = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/admin/albums", axiosConfig);
+      const res = await axios.get(`${API_URL}/api/admin/albums`, axiosConfig);
       setAlbums(res.data);
     } catch (err) {
       console.error(err);
@@ -122,7 +123,7 @@ const AdminDashboard = () => {
   const toggleRecommended = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:8080/api/admin/artists/${id}/toggle-recommended-artist`,
+        `${API_URL}/api/admin/artists/${id}/toggle-recommended-artist`,
         {},
         axiosConfig
       );
@@ -138,7 +139,7 @@ const AdminDashboard = () => {
   const toggleRecommendedAlbum = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:8080/api/admin/albums/${id}/toggle-recommended-album`,
+        `${API_URL}/api/admin/albums/${id}/toggle-recommended-album`,
         {},
         axiosConfig
       );
@@ -153,7 +154,7 @@ const AdminDashboard = () => {
 
   const deleteItem = async (type, id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/admin/${type}/${id}`, axiosConfig);
+      await axios.delete(`${API_URL}/api/admin/${type}/${id}`, axiosConfig);
       if (type === "artists") setArtists((prev) => prev.filter((a) => a._id !== id));
       if (type === "albums") setAlbums((prev) => prev.filter((a) => a._id !== id));
     } catch (err) {
@@ -169,7 +170,7 @@ const AdminDashboard = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/admin/subgenres",
+        `${API_URL}/api/admin/subgenres`,
         { name: newSubgenre, genre: genreId },
         axiosConfig
       );
@@ -208,7 +209,7 @@ const AdminDashboard = () => {
       newArtist.collaborations.forEach((c) => formData.append("collaborations", c));
 
     try {
-      await axios.post("http://localhost:8080/api/admin/artists", formData, {
+      await axios.post(`${API_URL}/api/admin/artists`, formData, {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
       });
       alert("Artista creado!");
@@ -237,7 +238,7 @@ const AdminDashboard = () => {
     if (newAlbum.cover) formData.append("cover", newAlbum.cover);
 
     try {
-      await axios.post("http://localhost:8080/api/admin/albums", formData, {
+      await axios.post(`${API_URL}/api/admin/albums`, formData, {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
       });
       alert("Álbum creado!");
@@ -256,7 +257,7 @@ const AdminDashboard = () => {
 
     try {
       const res = await axios.put(
-        "http://localhost:8080/api/auth/profile/image",
+        `${API_URL}/api/auth/profile/image`,
         formData,
         {
           headers: {

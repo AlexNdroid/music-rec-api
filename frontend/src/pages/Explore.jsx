@@ -7,10 +7,12 @@ function Explorar() {
   const [topArtists, setTopArtists] = useState([]);
   const [topPosts, setTopPosts] = useState([]);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const getImg = (img) => {
     if (!img) return "/default-cover.jpg";
     if (img.startsWith("http")) return img;
-    return `http://localhost:8080${img}`;
+    return `${API_URL}${img}`;
   };
 
   // ============================
@@ -20,7 +22,7 @@ function Explorar() {
  useEffect(() => {
   const fetchTrends = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/trends");
+      const res = await fetch(`${API_URL}/api/trends`);
       const data = await res.json();
       setTrends(data);
     } catch (err) {
@@ -36,7 +38,7 @@ function Explorar() {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/playlists");
+        const res = await fetch(`${API_URL}/api/playlists`);
         const data = await res.json();
 
         setPublicPlaylists(data.filter((pl) => pl.isPublic === true));
@@ -51,7 +53,7 @@ function Explorar() {
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/admin/artists");
+        const res = await fetch(`${API_URL}/api/admin/artists`);
         const data = await res.json();
         setTopArtists(data || []);
       } catch (err) {
@@ -65,7 +67,7 @@ function Explorar() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/posts");
+        const res = await fetch(`${API_URL}/api/posts`);
         const data = await res.json();
         setTopPosts((data.posts || []).slice(0, 5));
       } catch (err) {
@@ -80,7 +82,7 @@ function Explorar() {
     const token = localStorage.getItem("token");
 
     const res = await fetch(
-      `http://localhost:8080/api/recommendations/${recId}/like`,
+      `${API_URL}/api/recommendations/${recId}/like`,
       {
         method: "PUT",
         headers: {

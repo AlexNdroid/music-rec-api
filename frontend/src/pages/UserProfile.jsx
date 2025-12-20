@@ -18,6 +18,8 @@ function UserProfile() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
