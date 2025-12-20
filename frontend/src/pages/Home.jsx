@@ -3,21 +3,27 @@ import { useEffect, useState } from "react";
 import "../styles/Home.css";
 
 const Home = () => {
-
   const [trends, setTrends] = useState([]);
   const [recentRecs, setRecentRecs] = useState([]);
 
-useEffect(() => {
-  fetch("http://localhost:8080/api/trends")
-    .then(res => res.json())
-    .then(setTrends);
-}, []);
+// Obtener la URL de la API desde las variables de entorno
+  const API_URL = import.meta.env.VITE_API_URL;
 
-useEffect(() => {
-  fetch("http://localhost:8080/api/recommendations/recent")
-    .then(res => res.json())
-    .then(setRecentRecs);
-}, []);
+  // ================== Tendencias ==================
+  useEffect(() => {
+    fetch(`${API_URL}/api/trends`)
+      .then(res => res.json())
+      .then(setTrends)
+      .catch(err => console.error("Error cargando tendencias:", err));
+  }, []);
+
+  // ================== Recomendaciones recientes ==================
+  useEffect(() => {
+    fetch(`${API_URL}/api/recommendations/recent`)
+      .then(res => res.json())
+      .then(setRecentRecs)
+      .catch(err => console.error("Error cargando recomendaciones recientes:", err));
+  }, []);
 
   return (
     <main className="home-container">
@@ -33,26 +39,26 @@ useEffect(() => {
 
       {/* Tendencias del momento */}
       <section className="trending-section">
-      <h2>🔥 Tendencias del momento</h2>
-      {trends.length === 0 && <p>No hay tendencias aún</p>}
-      <div className="trending-list">
+        <h2>🔥 Tendencias del momento</h2>
+        {trends.length === 0 && <p>No hay tendencias aún</p>}
+        <div className="trending-list">
           {trends.map((t, i) => (
-            <div key={`${t._id.title}-${i}`} className="trend-card">
+            <div key={`${t._id}-${i}`} className="trend-card">
               <span className="trend-rank">#{i + 1}</span>
-
               <div className="trend-info">
-                <strong>{t._id.title}</strong>
-                <small>{t._id.artist}</small>
+                <strong>{t.title}</strong>
+                <small>{t.artist}</small>
               </div>
-
               <div className="trend-stats">
-                <span>⭐ {t.likes}</span>
-                <span>🎧 {t.recommendations}</span>
+                <span>⭐ {t.likesCount || 0}</span>
+                <span>🎧 {t.recommendations || 1}</span>
               </div>
             </div>
           ))}
         </div>
       </section>
+
+      {/* Recomendaciones recientes */}
       <section className="recent-recommendations">
         <h2>🆕 Recomendaciones recientes</h2>
         <div className="recent-list">
@@ -63,7 +69,7 @@ useEffect(() => {
                   rec.user?.image?.startsWith("http")
                     ? rec.user.image
                     : rec.user?.image
-                    ? `http://localhost:8080${rec.user.image}`
+                    ? `${API_URL}${rec.user.image}`
                     : "/default-avatar.png"
                 }
                 alt={rec.user?.username || "Usuario"}
@@ -82,3 +88,4 @@ useEffect(() => {
 };
 
 export default Home;
+
