@@ -36,7 +36,7 @@ function UserProfile() {
   try {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:8080/api/auth/profile/image", {
+    const res = await fetch(`${API_URL}/api/auth/profile/image`, {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` },
       body: formData
@@ -76,7 +76,7 @@ function UserProfile() {
     const fetchPosts = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:8080/api/posts", {
+        const res = await fetch(`${API_URL}/api/posts`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -94,7 +94,7 @@ function UserProfile() {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/admin/genres");
+        const res = await fetch(`${API_URL}/api/admin/genres`);
         const data = await res.json();
         setGenres(data || []);
       } catch (err) {
@@ -112,7 +112,7 @@ function UserProfile() {
 
     const fetchPlaylists = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/playlists");
+        const res = await fetch(`${API_URL}/api/playlists`);
         const data = await res.json();
         setPlaylists(data.filter(pl => pl.user?._id === user._id));
       } catch (err) {
@@ -128,7 +128,7 @@ function UserProfile() {
   const fetchRecommendations = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8080/api/recommendations", {
+      const res = await fetch(`${API_URL}/api/recommendations`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       const data = await res.json();
@@ -150,7 +150,7 @@ function UserProfile() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8080/api/posts", {
+      const res = await fetch(`${API_URL}/api/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -176,7 +176,7 @@ function UserProfile() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:8080/api/admin/posts/${postId}/comment`, {
+      const res = await fetch(`${API_URL}/api/admin/posts/${postId}/comment`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ content }),
@@ -208,7 +208,7 @@ function UserProfile() {
         coverImage: "/uploads/playlists/default.jpg",
       };
 
-      const res = await fetch("http://localhost:8080/api/playlists", {
+      const res = await fetch(`${API_URL}/api/playlists`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(payload),
@@ -235,7 +235,7 @@ function UserProfile() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`http://localhost:8080/api/playlists/${playlistId}`, {
+      const res = await fetch(`${API_URL}/api/playlists/${playlistId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ ...playlist, items: updatedItems })
@@ -259,7 +259,7 @@ function UserProfile() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`http://localhost:8080/api/playlists/${playlistId}`, {
+      const res = await fetch(`${API_URL}/api/playlists/${playlistId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ ...playlist, items: updatedItems })
@@ -280,7 +280,7 @@ function UserProfile() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`http://localhost:8080/api/playlists/${playlistId}`, {
+      const res = await fetch(`${API_URL}/api/playlists/${playlistId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -304,7 +304,7 @@ function UserProfile() {
 
   try {
     const token = localStorage.getItem("token");
-    const res = await fetch("http://localhost:8080/api/recommendations", {
+    const res = await fetch(`${API_URL}/api/recommendations`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -341,15 +341,16 @@ return (
 
             <div className="profile-image-section">
               <img
-              src={
-                previewImage ||
-                (user?.image?.startsWith("http")
-                  ? user.image
-                  : `http://localhost:8080${user?.image}`)
-                  || "/default-avatar.png"
+                src={
+                  previewImage ||
+                  (user?.image
+                    ? user.image.startsWith("http")
+                      ? user.image
+                      : `${API_URL}${user.image}`
+                    : "/default-avatar.png")
                 }
-              alt={user?.username}
-              className="profile-avatar"
+                alt={user?.username || "Usuario"}
+                className="profile-avatar"
               />
             
               <label className="upload-btn">
@@ -427,7 +428,7 @@ return (
                     src={
                       post.user?.image?.startsWith("http")  
                         ? post.user.image
-                        : `http://localhost:8080${post.user?.image}` || "/default-avatar.png"
+                        : `${API_URL}${post.user?.image}` || "/default-avatar.png"
                     } 
                     alt={post.user?.username || "Usuario"}
                     className="avatar"
