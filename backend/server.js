@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const connectDB = require("./db");
+const connectDB = require("./config/db");
 
 // ================== CONFIGURACIÓN INICIAL ==================
 dotenv.config();
@@ -66,7 +66,6 @@ app.get(/^\/(?!api).*/, (req, res) => {
 });
 
 // ================== CONEXIÓN A MONGO ==================
-const connectDB = require("./db");
 connectDB();
 
 // ================== INICIAR SERVIDOR ==================
