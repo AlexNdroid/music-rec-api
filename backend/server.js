@@ -1,24 +1,22 @@
 // ================== IMPORTACIONES ==================
-//Importar express y otros módulos necesarios
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
 
-// Permitir frontend de Render
+// ================== CONFIGURACIÓN INICIAL ==================
+dotenv.config();
+const app = express();
+
+// ================== CORS ==================
+// Permitir solo tu frontend de Render
 app.use(cors({
   origin: "https://music-rec-api-dw09.onrender.com",
   methods: ["GET", "POST", "PUT", "DELETE"],
 }));
-// ================== CONFIGURACIÓN INICIAL ==================
-// Cargar variables de entorno
-dotenv.config();
-// Crear la aplicación Express
-const app = express();
 
 // ================== MIDDLEWARES ==================
-app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static(path.resolve(__dirname, "uploads")));
 
@@ -30,37 +28,23 @@ const genreRoutes = require("./admin/routes/genresRoutes");
 const subgenreRoutes = require("./admin/routes/subgenreRoutes");
 const postRoutes = require("./admin/routes/postRoutes");
 
-
 // ================== RUTAS USER ==================
-const userRoutes = require("./user/routes/userRoutes"); //
+const userRoutes = require("./user/routes/userRoutes");
 const playlistRoutes = require("./user/routes/playlistRoutes");
 const trendsRoutes = require("./user/routes/trendsRoutes");
 const recommendationRoutes = require("./user/routes/recommendationRoutes");
 
 // ================== USO DE RUTAS ==================
-// Rutas públicas
 app.use("/api/users", userRoutes);
-app.use("/uploads", express.static("uploads"));
 app.use("/api/posts", postRoutes);
 app.use("/api/trends", trendsRoutes);
 app.use("/api/recommendations", recommendationRoutes);
-
-// Rutas de usuario
 app.use("/api/playlists", playlistRoutes);
-
-
-// Rutas de administración
 app.use("/api/admin/albums", albumRoutes);
 app.use("/api/admin/artists", artistRoutes);
 app.use("/api/admin/genres", genreRoutes);
 app.use("/api/admin/subgenres", subgenreRoutes);
-
-
-// Rutas de autenticación
 app.use("/api/auth", authRoutes);
-
-// ================== INICIAR SERVIDOR ==================
-const PORT = process.env.PORT || 5000;
 
 // ================== SERVIR FRONTEND (VITE) ==================
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
@@ -69,6 +53,8 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
+// ================== INICIAR SERVIDOR ==================
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
 });
