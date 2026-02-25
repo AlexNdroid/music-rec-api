@@ -16,17 +16,14 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // Postman, curl, etc.
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = `❌ CORS: el origen ${origin} no está permitido.`;
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: [
+    "http://localhost:5173",
+    "https://music-rec-api.netlify.app"
+  ],
   credentials: true
 }));
+
+app.options("*", cors());
 
 // ================== MIDDLEWARES ==================
 app.use(express.json());
@@ -57,13 +54,6 @@ app.use("/api/admin/artists", artistRoutes);
 app.use("/api/admin/genres", genreRoutes);
 app.use("/api/admin/subgenres", subgenreRoutes);
 app.use("/api/auth", authRoutes);
-
-// ================== SERVIR FRONTEND (VITE) ==================
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-});
 
 // ================== CONEXIÓN A MONGO ==================
 connectDB();
