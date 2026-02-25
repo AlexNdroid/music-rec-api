@@ -66,6 +66,7 @@ app.get(/^\/(?!api).*/, (req, res) => {
 });
 
 // ================== CONEXIÓN A MONGO ==================
+const connectDB = require("./db");
 connectDB();
 
 // ================== INICIAR SERVIDOR ==================
