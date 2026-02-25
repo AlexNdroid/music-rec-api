@@ -1,20 +1,31 @@
 // ================== IMPORTACIONES ==================
 const express = require("express");
-const mongoose = require("mongoose");
+const path = require("path");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const path = require("path");
+const connectDB = require("./db");
 
 // ================== CONFIGURACIÓN INICIAL ==================
 dotenv.config();
 const app = express();
 
 // ================== CORS ==================
-// Permitir peticiones desde tu frontend en Netlify
+const allowedOrigins = [
+  "http://localhost:5173",            // Frontend local Vite
+  "https://music-rec-api.netlify.app" // Frontend en Netlify
+];
+
 app.use(cors({
-  origin: "https://music-rec-api.netlify.app", // <- URL frontend
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // Postman, curl, etc.
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = `❌ CORS: el origen ${origin} no está permitido.`;
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true // auth
+  credentials: true
 }));
 
 // ================== MIDDLEWARES ==================
@@ -50,10 +61,12 @@ app.use("/api/auth", authRoutes);
 // ================== SERVIR FRONTEND (VITE) ==================
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-// Catch-all solo para rutas que **no empiecen con /api**
 app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
+
+// ================== CONEXIÓN A MONGO ==================
+connectDB();
 
 // ================== INICIAR SERVIDOR ==================
 const PORT = process.env.PORT || 5000;
