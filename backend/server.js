@@ -10,11 +10,6 @@ dotenv.config();
 const app = express();
 
 // ================== CORS ==================
-const allowedOrigins = [
-  "http://localhost:5173",            // Frontend local Vite
-  "https://music-rec-api.netlify.app" // Frontend en Netlify
-];
-
 app.use(cors({
   origin: [
     "http://localhost:5173",
