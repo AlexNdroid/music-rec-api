@@ -57,6 +57,13 @@ app.use("/api/auth", authRoutes);
 // ================== INICIAR SERVIDOR ==================
 const PORT = process.env.PORT || 5000;
 
+// ================== SERVIR FRONTEND (VITE) ==================
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
 });
