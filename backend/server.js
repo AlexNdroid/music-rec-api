@@ -10,10 +10,10 @@ dotenv.config();
 const app = express();
 
 // ================== CORS ==================
-// Permitir solo tu frontend de Render
+// Permitir solo frontend de Render
 app.use(cors({
   origin: "https://music-rec-api-dw09.onrender.com",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE"]
 }));
 
 // ================== MIDDLEWARES ==================
