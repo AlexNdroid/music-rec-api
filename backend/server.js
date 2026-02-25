@@ -10,10 +10,11 @@ dotenv.config();
 const app = express();
 
 // ================== CORS ==================
-// Permitir solo frontend de Render
+// Permitir peticiones desde tu frontend en Netlify
 app.use(cors({
-  origin: "https://music-rec-api-1rol.onrender.com",
-  methods: ["GET", "POST", "PUT", "DELETE"]
+  origin: "https://music-rec-api.netlify.app", // <- URL frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true // auth
 }));
 
 // ================== MIDDLEWARES ==================
