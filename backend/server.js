@@ -6,11 +6,11 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
 
-//Permitir cors from frontend
+// Permitir frontend de Render
 app.use(cors({
-  origin: "https://music-rec-api-dw09.onrender.com"
+  origin: "https://music-rec-api-dw09.onrender.com",
+  methods: ["GET", "POST", "PUT", "DELETE"],
 }));
-
 // ================== CONFIGURACIÓN INICIAL ==================
 // Cargar variables de entorno
 dotenv.config();
