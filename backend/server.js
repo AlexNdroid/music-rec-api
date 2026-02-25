@@ -49,7 +49,8 @@ app.use("/api/auth", authRoutes);
 // ================== SERVIR FRONTEND (VITE) ==================
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-app.get("/*", (req, res) => {
+// Catch-all solo para rutas que **no empiecen con /api**
+app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
