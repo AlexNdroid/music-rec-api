@@ -12,7 +12,7 @@ const app = express();
 // ================== CORS ==================
 // Permitir solo frontend de Render
 app.use(cors({
-  origin: "https://music-rec-api-dw09.onrender.com",
+  origin: "https://music-rec-api-1rol.onrender.com",
   methods: ["GET", "POST", "PUT", "DELETE"]
 }));
 
